@@ -1,0 +1,19 @@
+.Toggle-wrapper {
+  text-align: center;
+}
+.Toggle-wrapper button {
+  width: 100px;
+  padding: 10px;
+  font-size: 1.2rem;
+  border-radius: 0;
+  border: 2px solid #222;
+  color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.42);
+  cursor: pointer;
+}
+.Toggle-on {
+  background-color: #579657;
+}
+.Toggle-off {
+  background-color: #964b4b;
+}
