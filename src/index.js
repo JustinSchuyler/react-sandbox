@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import Calculator from './Calculator/Calculator';
 import CommentForm from './CommentForm';
 import Comments from './Comments';
 import Game from './Game/Game';
@@ -11,6 +12,7 @@ import './index.css';
 ReactDOM.render(
   <div>
     <App />
+    <Calculator />
     <Timer />
     <Comments />
     <CommentForm />
