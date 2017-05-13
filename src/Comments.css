@@ -18,3 +18,14 @@
   color: #fff;
   border-color: #670000;
 }
+.Comments li button.delete {
+  margin-left: auto;
+  border: 1px solid #bd2222;
+  background-color: #d6153a;
+  box-shadow: 0 3px 5px rgba(0,0,0,0.25);
+  color: #fff;
+  width: 25px;
+  height: 25px;
+  border-radius: 100%;
+  cursor: pointer;
+}
