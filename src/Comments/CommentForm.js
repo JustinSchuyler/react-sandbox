@@ -21,6 +21,7 @@ class CommentForm extends React.Component {
     this.postComment(this.state.value)
       .then(comment => {
         this.setState({value: ''});
+        this.props.onSuccess(comment);
       })
       .catch(error => {
         console.log(error);
@@ -35,7 +36,7 @@ class CommentForm extends React.Component {
         let json = JSON.parse(response.target.response);
         resolve(json);
       };
-      
+
       xhr.onerror = (error) => {
         reject(error);
       };

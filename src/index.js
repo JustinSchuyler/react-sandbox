@@ -2,8 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import Calculator from './Calculator/Calculator';
-import CommentForm from './CommentForm';
-import Comments from './Comments';
+import Comments from './Comments/Comments';
 import Game from './Game/Game';
 import Timer from './Timer';
 import Toggle from './Toggle';
@@ -15,7 +14,6 @@ ReactDOM.render(
     <Calculator />
     <Timer />
     <Comments />
-    <CommentForm />
     <Game />
     <Toggle />
   </div>,

@@ -1,11 +1,13 @@
 import React from 'react';
-import './Comments.css';
+import CommentList from './CommentList';
+import CommentForm from './CommentForm';
 
 class Comments extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
-      comments: []
+      comments: [],
+      error: ''
     };
   }
 
@@ -48,27 +50,31 @@ class Comments extends React.Component {
       this.setState({comments});
     };
     xhr.onerror = (error) => {
-      console.log(error);
+      this.setState({
+        error: 'Could not delete comment'
+      });
     };
     xhr.open('DELETE', url, true);
 
     xhr.send();
   }
 
+  handleOnSuccess(comment) {
+    let comments = this.state.comments.slice();
+    comments.push(comment);
+
+    this.setState({comments});
+  }
+
   render() {
     return (
-      <ul className="Comments">
-        {this.state.comments.map(comment => (
-          <li key={comment._id}>
-            <div>{(new Date(comment.addDate)).toDateString()}</div>
-            <div>{comment.text}</div>
-            <button onClick={() => this.deleteComment(comment)} className="delete">X</button>
-          </li>
-        ))}
-        {(this.state.error) ? (
-          <li key="error" className="error">{this.state.error}</li>
-        ) : ''}
-      </ul>
+      <div>
+        <CommentList
+          comments={this.state.comments}
+          deleteComment={(comment) => this.deleteComment(comment)}
+          error={this.state.error} />
+        <CommentForm onSuccess={(comment) => this.handleOnSuccess(comment)} />
+      </div>
     );
   }
 }
