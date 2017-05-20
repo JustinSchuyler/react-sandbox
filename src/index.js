@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import {
   BrowserRouter as Router,
   Route,
-  Link
+  NavLink
 } from 'react-router-dom';
 import Calculator from './Calculator/Calculator';
 import Comments from './Comments/Comments';
@@ -19,11 +19,11 @@ ReactDOM.render(
   <Router>
     <div>
       <ul>
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/calculator">Calculator</Link></li>
-        <li><Link to="/comments">Comments</Link></li>
-        <li><Link to="/game">Game</Link></li>
-        <li><Link to="/topics">Topics</Link></li>
+        <li><NavLink to="/" exact>Home</NavLink></li>
+        <li><NavLink to="/calculator">Calculator</NavLink></li>
+        <li><NavLink to="/comments">Comments</NavLink></li>
+        <li><NavLink to="/game">Game</NavLink></li>
+        <li><NavLink to="/topics">Topics</NavLink></li>
       </ul>
       <hr />
       <Route exact path="/" component={Home} />
