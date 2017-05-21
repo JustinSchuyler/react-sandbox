@@ -49,22 +49,42 @@ function ProductTable(props) {
   );
 }
 
-function SearchBar(props) {
-  return (
-    <div>
+class SearchBar extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleFilterInputChange = this.handleFilterInputChange.bind(this);
+    this.handleInStockInputChange = this.handleInStockInputChange.bind(this);
+  }
+
+  handleFilterInputChange(e) {
+    this.props.onFilterInput(e.target.value);
+  }
+
+  handleInStockInputChange(e) {
+    this.props.onInStockInput(e.target.checked);
+  }
+
+  render() {
+    return (
       <div>
-        <input
-          placeholder="Search..."
-          value={props.query}
-          autoFocus />
+        <div>
+          <input
+            placeholder="Search..."
+            value={this.props.query}
+            onChange={this.handleFilterInputChange}
+            autoFocus />
+        </div>
+        <label>
+          <input
+            type="checkbox"
+            checked={this.props.inStockOnly}
+            onChange={this.handleInStockInputChange} />
+          {' '}
+          Only show products in stock
+        </label>
       </div>
-      <label>
-        <input type="checkbox" checked={props.inStockOnly} />
-        {' '}
-        Only show products in stock
-      </label>
-    </div>
-  );
+    );
+  }
 }
 
 class FilterableProductTable extends React.Component {
@@ -73,7 +93,17 @@ class FilterableProductTable extends React.Component {
     this.state = {
       query: '',
       inStockOnly: false
-    }
+    };
+    this.handleFilterInput = this.handleFilterInput.bind(this);
+    this.handleInStockInput = this.handleInStockInput.bind(this);
+  }
+
+  handleFilterInput(query) {
+    this.setState({ query });
+  }
+
+  handleInStockInput(inStockOnly) {
+    this.setState({ inStockOnly });
   }
 
   render() {
@@ -81,7 +111,9 @@ class FilterableProductTable extends React.Component {
       <div>
         <SearchBar
           query={this.state.query}
-          inStockOnly={this.state.inStockOnly} />
+          inStockOnly={this.state.inStockOnly}
+          onFilterInput={this.handleFilterInput}
+          onInStockInput={this.handleInStockInput} />
         <ProductTable
           products={products}
           query={this.state.query}

@@ -10,6 +10,7 @@ import Comments from './Comments/Comments';
 import Game from './Game/Game';
 import Topics from './Topics/Topics';
 import FilterableProductTable from './FilterableProductTable/FilterableProductTable';
+import './FilterableProductTable/FilterableProductTable.css';
 import './index.css';
 
 const Home = () => (
