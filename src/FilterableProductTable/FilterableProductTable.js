@@ -14,7 +14,12 @@ function ProductCategoryRow(props) {
 }
 
 function ProductRow(props) {
-  return <tr><td>{props.name}</td><td>{props.price}</td></tr>;
+  return (
+    <tr>
+      <td className={!props.stocked ? 'not-in-stock' : ''}>{props.name}</td>
+      <td>{props.price}</td>
+    </tr>
+  );
 }
 
 function ProductTable(props) {
@@ -25,7 +30,13 @@ function ProductTable(props) {
     if (lastCategory !== product.category) {
       rows.push(<ProductCategoryRow category={product.category} key={product.category} />);
     }
-    rows.push(<ProductRow name={product.name} price={product.price} key={product.name} />);
+    rows.push(
+      <ProductRow
+        name={product.name}
+        price={product.price}
+        stocked={product.stocked}
+        key={product.name} />
+    );
     lastCategory = product.category;
   });
 
@@ -37,10 +48,31 @@ function ProductTable(props) {
   );
 }
 
+function SearchBar(props) {
+  return (
+    <div>
+      <div>
+        <input
+          placeholder="Search..."
+          value={props.query}
+          autoFocus />
+      </div>
+      <label>
+        <input type="checkbox" checked={props.inStockOnly} />
+        {' '}
+        Only show products in stock
+      </label>
+    </div>
+  );
+}
+
 class FilterableProductTable extends React.Component {
   render() {
     return (
-      <ProductTable products={products} />
+      <div>
+        <SearchBar query={''} inStockOnly={false} />
+        <ProductTable products={products} />
+      </div>
     );
   }
 }
