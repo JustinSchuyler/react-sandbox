@@ -27,7 +27,9 @@ function ProductTable(props) {
   let lastCategory = null;
 
   props.products.forEach(product => {
-    if (product.name.indexOf(props.query) === -1 || (props.inStockOnly && !product.stocked)) return;
+    const match = props.query && !(new RegExp(`${props.query.trim()}`, 'gi').test(product.name));
+    if (match || (props.inStockOnly && !product.stocked)) return;
+
     if (lastCategory !== product.category) {
       rows.push(<ProductCategoryRow category={product.category} key={product.category} />);
     }
