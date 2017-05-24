@@ -10,7 +10,8 @@ class Game extends React.Component {
         squares: Array(9).fill(null)
       }],
       stepNumber: 0,
-      xIsNext: true
+      xIsNext: true,
+      moveOrder: 'dsc'
     };
 
     this.restartGame = this.restartGame.bind(this);
@@ -37,7 +38,7 @@ class Game extends React.Component {
 
   jumpTo(e, step) {
     e.preventDefault();
-    
+
     this.setState({
       stepNumber: step,
       xIsNext: (step % 2) ? false : true
@@ -54,12 +55,18 @@ class Game extends React.Component {
     });
   }
 
+  sortMoves = () => {
+    this.setState((prevState) => ({
+      moveOrder: prevState.moveOrder == 'asc' ? 'dsc' : 'asc'
+    }));
+  };
+
   render() {
     const history = this.state.history;
     const current = history[this.state.stepNumber];
     const winner = calculateWinner(current.squares);
 
-    const moves = history.map((move, step) => {
+    let moves = history.map((move, step) => {
       const desc = step
         ? 'Move #' + step
         : 'Game start';
@@ -70,6 +77,10 @@ class Game extends React.Component {
         </li>
       );
     });
+
+    if (this.state.moveOrder == 'asc') {
+      moves.reverse();
+    }
 
     let status;
     if (winner) {
@@ -88,6 +99,7 @@ class Game extends React.Component {
         </div>
         <div className="game-info">
           <div>{status}</div>
+          <h4 onClick={this.sortMoves} className="moves-header">Moves {this.state.moveOrder == 'asc' ? '^' : 'v'}</h4>
           <ol>{moves}</ol>
           <button onClick={this.restartGame}>Restart</button>
         </div>
