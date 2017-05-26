@@ -1,19 +1,29 @@
 import React from 'react';
 
 function Square(props) {
+  let classes = ['square'];
+  if (props.isWinningSquare) {
+    classes.push('winning-line');
+  }
+
   return (
-    <button className="square" onClick={props.onClick}>
+    <button className={classes.join(' ')} onClick={props.onClick}>
       {props.value}
     </button>
   );
 }
 
 class Board extends React.Component {
+  checkIfWinningSquare(i) {
+    return (this.props.winningLine && this.props.winningLine.indexOf(i) !== -1);
+  }
+
   renderSquare(i) {
     return (
       <Square
         value={this.props.squares[i]}
-        onClick={() => this.props.onClick(i)} />
+        onClick={() => this.props.onClick(i)}
+        isWinningSquare={this.checkIfWinningSquare(i)} />
     );
   }
 

@@ -53,7 +53,8 @@ ol, ul {
   margin-left: 20px;
 }
 
-li.selected a {
+li.selected a,
+.winning-line {
   font-weight: bold;
   color: #ff8600;
 }
